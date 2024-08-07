@@ -1,12 +1,17 @@
 from typing import Optional
 from fastapi import APIRouter, HTTPException
-from data_access_layer.questions import *
+from data_access_layer.opentdb_questions_dal import *
 
 router = APIRouter()
 
-@router.get('/')
+@router.get('/questions/')
 async def questions():
-    return get_questions()
+    questions, length = get_questions()
+    response = {
+        'response': f'There are {length} questions. Showing random {len(questions)} questions',
+        'questions': questions
+    }
+    return response
 
 @router.get('/random-question/')
 async def random_question():
@@ -14,9 +19,9 @@ async def random_question():
 
 @router.get('/questions-by-filter/')
 async def questions_by_filter(type: Optional[str] = None, category: Optional[str] = None, difficulty: Optional[str] = None):
-    response = get_questions_by_filter(type=type, category=category, difficulty=difficulty)
+    questions, length = get_questions_by_filter(type=type, category=category, difficulty=difficulty)
 
-    if len(response) == 0:
+    if length == 0:
         detail = {
             'response': 'No questions found. One or more of the filters you provided does not satisfy the correct values.',
             'types': ['boolean', 'multiple'],
@@ -25,4 +30,8 @@ async def questions_by_filter(type: Optional[str] = None, category: Optional[str
         }
         raise HTTPException(status_code=404, detail=detail)
 
+    response = {
+        'response': f'There are {length} questions. Showing random {len(questions)} questions',
+        'questions': questions
+    }
     return response

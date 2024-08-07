@@ -1,13 +1,14 @@
 from datetime import datetime
-from data_access_layer.questions import store_questions, store_categories
+from data_access_layer.opentdb_questions_dal import store_questions, store_categories
 from dotenv import load_dotenv
 import requests
 import logging
 import os
 
 load_dotenv()
+
 opentdb_token = os.getenv('OPENTDB_TOKEN')
-logging.basicConfig(filename='logs/utils_get_questions.log', level=logging.INFO)
+logging.basicConfig(filename='logs/opentdb_questions_utils.log', level=logging.INFO)
 
 def get_and_store_questions():
     while True:

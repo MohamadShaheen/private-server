@@ -1,7 +1,7 @@
-import random
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
+from data_access_layer import general_questions_dal
 
 load_dotenv()
 
@@ -76,35 +76,13 @@ def fix_questions():
         collection.update_one({'_id': document['_id']}, {'$set': {'question': corrected_question}})
 
 def get_questions():
-    db_questions = collection.find({}, {'_id': 0})
-    questions = [question for question in db_questions]
-    return questions
+    return general_questions_dal.get_questions(collection)
 
 def get_random_question():
-    questions = get_questions()
-    question = random.choice(questions)
-    return question
+    return general_questions_dal.get_random_question(collection)
 
 def get_questions_by_filter(type: str = None, category: str = None, difficulty: str = None):
-    args = {
-        'type': '',
-        'category': '',
-        'difficulty': ''
-    }
-
-    if type:
-        args['type'] = type.lower()
-    if category:
-        args['category'] = category.title()
-    if difficulty:
-        args['difficulty'] = difficulty.lower()
-
-    db_questions = collection.find(args, {'_id': 0})
-    questions = [question for question in db_questions]
-    return questions
+    return general_questions_dal.get_questions_by_filter(collection, type, category, difficulty)
 
 def get_questions_categories():
-    local_collection = database['categories']
-    db_categories = local_collection.find({}, {'_id': 0})
-    categories = [category['category'] for category in db_categories]
-    return categories
+    return general_questions_dal.get_questions_categories(database)

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import questions
+from routes import opentdb_questions_route, trivia_questions_route
 
 app = FastAPI()
 
@@ -7,4 +7,5 @@ app = FastAPI()
 async def root():
     return 'Hello World!'
 
-app.include_router(questions.router, prefix='/questions')
+app.include_router(opentdb_questions_route.router, prefix='/opentdb-questions', tags=['opentdb-questions'])
+app.include_router(trivia_questions_route.router, prefix='/trivia-questions', tags=['trivia-questions'])
