@@ -11,7 +11,7 @@ def get_questions(collection):
     return questions, questions_length
 
 def get_random_question(collection):
-    questions = get_questions(collection)
+    questions, _ = get_questions(collection)
     question = random.choice(questions)
     return question
 

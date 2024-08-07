@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 opentdb_token = os.getenv('OPENTDB_TOKEN')
-logging.basicConfig(filename='logs/opentdb_questions_utils.log', level=logging.INFO)
+logging.basicConfig(filename='logs/opentdb_questions_utils.log', level=logging.INFO, force=True)
 
 def get_and_store_questions():
     while True:

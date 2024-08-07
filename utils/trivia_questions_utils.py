@@ -9,7 +9,7 @@ import os
 
 load_dotenv()
 
-logging.basicConfig(filename='logs/trivia_questions_utils.log', level=logging.INFO)
+logging.basicConfig(filename='logs/trivia_questions_utils.log', level=logging.INFO, force=True)
 
 def get_and_store_questions_and_categories():
     questions_id = set()
