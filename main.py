@@ -1,11 +1,13 @@
-from utils.opentdb_questions_utils import get_and_store_questions, get_and_store_categories
-from utils.trivia_questions_utils import get_and_store_questions_and_categories
+from utils import opentdb_questions_utils
+from utils import trivia_questions_utils
+from utils import quiz_questions_utils
 
 
 def main():
-    get_and_store_questions()
-    get_and_store_categories()
-    get_and_store_questions_and_categories()
+    opentdb_questions_utils.get_and_store_questions()
+    opentdb_questions_utils.get_and_store_categories()
+    trivia_questions_utils.get_and_store_questions_and_categories()
+    quiz_questions_utils.get_and_store_questions_and_categories()
 
 if __name__ == '__main__':
     main()

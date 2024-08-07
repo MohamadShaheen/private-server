@@ -1,13 +1,7 @@
 from datetime import datetime
-from pprint import pprint
-
 from data_access_layer.trivia_questions_dal import store_questions_and_categories
-from dotenv import load_dotenv
 import requests
 import logging
-import os
-
-load_dotenv()
 
 logging.basicConfig(filename='logs/trivia_questions_utils.log', level=logging.INFO, force=True)
 
@@ -36,7 +30,7 @@ def get_and_store_questions_and_categories():
                     })
                     categories.add(category)
         else:
-            logging.error(f'Error: {response.status_code}')
+            logging.error(f'Error: {response.status_code} - [{datetime.now().strftime("%d-%m-%Y %H:%M:%S")}]')
 
     categories_list = [{'category': category} for category in categories]
     store_questions_and_categories(questions=questions_data, categories=categories_list)

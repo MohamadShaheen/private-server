@@ -23,7 +23,7 @@ def get_and_store_questions():
             store_questions(response.json()['results'])
             logging.info(f"Questions have been stored successfully - [{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}]")
         else:
-            logging.error(f'Error: {response.status_code}')
+            logging.error(f'Error: {response.status_code} - [{datetime.now().strftime("%d-%m-%Y %H:%M:%S")}]')
 
 def get_and_store_categories():
     response = requests.get('https://opentdb.com/api_category.php')
@@ -37,4 +37,4 @@ def get_and_store_categories():
         store_categories(categories)
         logging.info(f"Categories have been stored successfully - [{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}]")
     else:
-        logging.error(f'Error: {response.status_code}')
+        logging.error(f'Error: {response.status_code} - [{datetime.now().strftime("%d-%m-%Y %H:%M:%S")}]')

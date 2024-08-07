@@ -6,7 +6,7 @@ from data_access_layer import general_questions_dal
 load_dotenv()
 
 client = MongoClient(os.getenv('MONGODB_URL'))
-database = client['trivia_questions']
+database = client['quiz_questions']
 collection = database['questions']
 
 def store_questions_and_categories(questions, categories):
