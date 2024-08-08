@@ -1,6 +1,6 @@
 # Introduction
 
-In this project we fetch questions from [OpenTDB](https://opentdb.com/api_config.php), [TriviaAPI](https://the-trivia-api.com/docs/v2/) and [QuizAPI](https://quizapi.io/docs/1.0/overview) and store them into [MongoDB](https://www.mongodb.com/try/download/shell). These question then used to server FastAPI endpoints for multiple purposes.
+In this project we fetch questions from [OpenTDB](https://opentdb.com/api_config.php), [TriviaAPI](https://the-trivia-api.com/docs/v2/) and [QuizAPI](https://quizapi.io/docs/1.0/overview) and store them into [MongoDB](https://www.mongodb.com/try/download/shell). These question then used to serve FastAPI endpoints for multiple purposes.
 
 # Instructions
 
