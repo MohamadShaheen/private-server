@@ -1,5 +1,5 @@
 from datetime import datetime
-from data_access_layer.trivia_questions_dal import store_questions_and_categories
+from data_access_layer.questions_dal import store_questions_and_categories
 import requests
 import logging
 

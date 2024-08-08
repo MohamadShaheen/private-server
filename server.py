@@ -1,12 +1,19 @@
+import logging
+from datetime import datetime
+
+import uvicorn
 from fastapi import FastAPI
-from routes import opentdb_questions_route, trivia_questions_route, quiz_questions_route
+from routes import questions_route
 
 app = FastAPI()
+logging.basicConfig(filename='logs/app.log', level=logging.INFO, force=True)
 
 @app.get('/')
 async def root():
+    logging.info(f"Received request for 'root' endpoint - [{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}]")
     return 'Hello World!'
 
-app.include_router(opentdb_questions_route.router, prefix='/opentdb-questions', tags=['opentdb-questions'])
-app.include_router(trivia_questions_route.router, prefix='/trivia-questions', tags=['trivia-questions'])
-app.include_router(quiz_questions_route.router, prefix='/quiz-questions', tags=['quiz-questions'])
+app.include_router(questions_route.router, prefix='/questions', tags=['questions'])
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='0.0.0.0', port=8000, reload=True)
