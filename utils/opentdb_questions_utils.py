@@ -1,6 +1,6 @@
-import time
 from datetime import datetime
-from data_access_layer.questions_dal import store_opentdb_questions, store_opentdb_categories
+from data_access_layer.questions_dal import store_opentdb_questions
+from data_access_layer.categories_dal import store_opentdb_categories
 import requests
 import logging
 

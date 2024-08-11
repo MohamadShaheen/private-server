@@ -2,20 +2,10 @@ import logging
 from datetime import datetime
 from typing import Optional
 from fastapi import APIRouter, HTTPException
+from data_access_layer.categories_dal import get_questions_categories
 from data_access_layer.questions_dal import *
 
 router = APIRouter()
-
-@router.get('/')
-async def questions():
-    logging.info(f"Received request for /questions/ endpoint - [{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}]")
-    questions, length = get_questions()
-    response = {
-        'response': f'There are {length} questions. Showing random {len(questions)} questions',
-        'questions': questions
-    }
-    logging.info(f"Request for /questions/ endpoint was processed successfully - [{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}]")
-    return response
 
 @router.get('/random-question/')
 async def random_question():

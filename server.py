@@ -4,7 +4,7 @@ import os.path
 from datetime import datetime
 import uvicorn
 from fastapi import FastAPI
-from routes import questions_route
+from routes import questions_route, categories_route
 
 app = FastAPI()
 if not os.path.exists('config/logs.json'):
@@ -28,6 +28,7 @@ async def root():
     return 'Hello World!'
 
 app.include_router(questions_route.router, prefix='/questions', tags=['questions'])
+app.include_router(categories_route.router, prefix='/categories', tags=['categories'])
 
 if __name__ == '__main__':
     uvicorn.run(app, host='localhost', port=8000)
