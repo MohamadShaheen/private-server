@@ -72,3 +72,45 @@ You can run the server in any of the following ways:
 2. ```shell
    python server.py
    ```
+
+# Questions Database
+
+There are two types of questions, `multiple` and `boolean`. The questions are represented in the database in the following form:
+
+- Boolean questions:
+
+```json
+{
+  "_id": {
+    "$oid": "66b4d3cb9efdafc18501d22d"
+  },
+  "type": "boolean",
+  "difficulty": "easy",
+  "category": "History",
+  "question": "The Spitfire originated from a racing plane.",
+  "correct_answer": "True",
+  "incorrect_answers": [
+    "False"
+  ]
+}
+```
+
+- Multiple questions:
+
+```json
+{
+  "_id": {
+    "$oid": "66a4ec1101b1d98e4f482e00"
+  },
+  "type": "multiple",
+  "difficulty": "easy",
+  "category": "General Knowledge",
+  "question": "What airline was the owner of the plane that crashed off the coast of Nova Scotia in 1998?",
+  "correct_answer": "Swiss Air",
+  "incorrect_answers": [
+    "Air France",
+    "British Airways",
+    "TWA"
+  ]
+}
+```
