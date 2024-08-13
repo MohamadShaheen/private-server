@@ -8,9 +8,9 @@ In this project we fetch questions from [OpenTDB](https://opentdb.com/api_config
 
 # Features
 
-- Get all questions.
 - Get random question.
 - Get questions by filter.
+- Get all categories.
 
 # Technologies Used
 
