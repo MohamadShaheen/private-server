@@ -9,7 +9,6 @@ class Founder(Base):
     username = Column(String(50), unique=True, nullable=False)
     name = Column(String(50), unique=False, nullable=False)
     password = Column(String(100), unique=False, nullable=False)
-    ultimate_founder_token = Column(String(100), unique=False, nullable=True)
 
 class Admin(Base):
     __tablename__ = 'admins'
@@ -25,6 +24,5 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=False)
     username = Column(String(50), unique=True, nullable=False)
     name = Column(String(50), unique=False, nullable=False)
-    password = Column(String(50), unique=False, nullable=False)
 
 # Base.metadata.create_all(bind=engine)

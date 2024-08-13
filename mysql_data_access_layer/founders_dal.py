@@ -1,7 +1,7 @@
 from sqlalchemy import or_
 from fastapi import HTTPException
-from utils.hash_texts import hash_text
 from database.models import Admin, Founder
+from utils.hash_texts import hash_text, verify_text
 from database.database_connection import SessionLocal
 
 session = SessionLocal()
@@ -97,7 +97,7 @@ def delete_admins():
     for db_admin in db_admins:
         delete_admin(db_admin.id, db_admin.username)
 
-def add_founder(id: int, username: str, name: str, password: str, ultimate_founder_token: str):
+def add_founder(id: int, username: str, name: str, password: str):
     db_founder = session.query(Founder).filter(Founder.id == id).first()
 
     if db_founder:
@@ -128,7 +128,18 @@ def get_founders():
         founders[db_founder.id] = {
             'username': db_founder.username,
             'name': db_founder.name,
-            'password': db_founder.password
         }
 
     return founders
+
+def verify_founder(id: int, username: str, password: str):
+    db_founder = session.query(Founder).filter(Founder.id == id).first()
+
+    if not db_founder:
+        raise HTTPException(status_code=404, detail='Founder does not exist')
+
+    if username != db_founder.username:
+        raise HTTPException(status_code=403, detail='Founder username does not match')
+
+    if not verify_text(plain_text=password, hashed_text=db_founder.password):
+        raise HTTPException(status_code=403, detail='Founder password does not match')
