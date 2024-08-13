@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
 from fastapi import APIRouter
-from data_access_layer.categories_dal import get_questions_categories
+from mongodb_data_access_layer.categories_dal import get_questions_categories
 
 router = APIRouter()
 

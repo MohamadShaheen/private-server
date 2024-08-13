@@ -1,9 +1,9 @@
 import logging
-from datetime import datetime
 from typing import Optional
+from datetime import datetime
 from fastapi import APIRouter, HTTPException
-from data_access_layer.categories_dal import get_questions_categories
-from data_access_layer.questions_dal import *
+from mongodb_data_access_layer.questions_dal import *
+from mongodb_data_access_layer.categories_dal import get_questions_categories
 
 router = APIRouter()
 

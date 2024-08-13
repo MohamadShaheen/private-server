@@ -1,9 +1,9 @@
-import json
 import os
-from utils import opentdb_questions_utils
-from utils import trivia_questions_utils
+import json
 from utils import quiz_questions_utils
-
+from utils import trivia_questions_utils
+from utils import opentdb_questions_utils
+from database.database_connection import Base, engine
 
 def main():
     if not os.path.exists('config/api_request.json'):
@@ -26,6 +26,9 @@ def main():
         data['trivia_questions'] = 1
         data['quiz_questions'] = 1
         json.dump(data, file, indent=4)
+
+    # Create MySQL database tables
+    Base.metadata.create_all(bind=engine)
 
 
 if __name__ == '__main__':

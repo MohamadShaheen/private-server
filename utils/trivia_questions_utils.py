@@ -1,7 +1,7 @@
-from datetime import datetime
-from data_access_layer.questions_dal import store_questions_and_categories
-import requests
 import logging
+import requests
+from datetime import datetime
+from mongodb_data_access_layer.questions_dal import store_questions_and_categories
 
 logging.basicConfig(filename='logs/trivia_questions_utils.log', level=logging.INFO, force=True)
 

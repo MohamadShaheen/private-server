@@ -1,9 +1,9 @@
-from data_access_layer.questions_dal import store_questions_and_categories
+import os
+import logging
+import requests
 from datetime import datetime
 from dotenv import load_dotenv
-import os
-import requests
-import logging
+from mongodb_data_access_layer.questions_dal import store_questions_and_categories
 
 load_dotenv()
 

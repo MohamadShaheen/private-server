@@ -1,8 +1,8 @@
-import random
-from pymongo import MongoClient
 import os
+import random
 from dotenv import load_dotenv
-from data_access_layer.categories_dal import store_categories, fix_categories_names
+from pymongo import MongoClient
+from mongodb_data_access_layer.categories_dal import store_categories, fix_categories_names
 
 load_dotenv()
 

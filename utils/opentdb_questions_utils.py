@@ -1,8 +1,8 @@
-from datetime import datetime
-from data_access_layer.questions_dal import store_opentdb_questions
-from data_access_layer.categories_dal import store_opentdb_categories
-import requests
 import logging
+import requests
+from datetime import datetime
+from mongodb_data_access_layer.questions_dal import store_opentdb_questions
+from mongodb_data_access_layer.categories_dal import store_opentdb_categories
 
 logging.basicConfig(filename='logs/opentdb_questions_utils.log', level=logging.INFO, force=True)
 
