@@ -1,6 +1,6 @@
 from fastapi import HTTPException
-from database.models import User
-from utils.hash_texts import hash_text, verify_text
+from database.models import User, Admin
+from utils.hash_texts import verify_text
 from database.database_connection import SessionLocal
 
 session = SessionLocal()
@@ -43,3 +43,15 @@ def get_users():
         }
 
     return users
+
+def verify_admin(id: int, username: str, password: str):
+    db_admin = session.query(Admin).filter(Admin.id == id).first()
+
+    if not db_admin:
+        raise HTTPException(status_code=404, detail='Admin does not exist')
+
+    if username != db_admin.username:
+        raise HTTPException(status_code=403, detail='Admin username does not match')
+
+    if password != db_admin.password:
+        raise HTTPException(status_code=403, detail='Admin password does not match')

@@ -1,21 +1,21 @@
 import logging
 from typing import Optional
 from datetime import datetime
-from fastapi import APIRouter, HTTPException
 from mongodb_data_access_layer.questions_dal import *
+from fastapi import APIRouter, HTTPException, Request
 from mongodb_data_access_layer.categories_dal import get_questions_categories
 
 router = APIRouter()
 
 @router.get('/random-question/')
-async def random_question():
+async def random_question(request: Request):
     logging.info(f"Received request for /questions/random-question/ endpoint - [{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}]")
     response = get_random_question()
     logging.info(f"Request for /questions/random-question/ endpoint was processed successfully - [{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}]")
     return response
 
 @router.get('/filter/')
-async def questions_by_filter(type: Optional[str] = None, category: Optional[str] = None, difficulty: Optional[str] = None):
+async def questions_by_filter(request: Request, type: Optional[str] = None, category: Optional[str] = None, difficulty: Optional[str] = None):
     logging.info(f"Received request for /questions/filter/ endpoint - [{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}]")
     questions, length = get_questions_by_filter(type=type, category=category, difficulty=difficulty)
 

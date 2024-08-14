@@ -7,7 +7,7 @@ from database.database_connection import SessionLocal
 session = SessionLocal()
 
 def add_admin(id: int, username: str, name: str, password: str):
-    db_admin = session.query(Admin).filter(Admin.id == id).first()
+    db_admin = session.query(Admin).filter(or_(Admin.id == id, Admin.username == username)).first()
 
     if db_admin:
         raise HTTPException(status_code=409, detail='Admin already exists')
@@ -24,7 +24,7 @@ def add_admin(id: int, username: str, name: str, password: str):
     session.commit()
     session.close()
 
-    return db_admin
+    return admin_data
 
 def delete_admin(id: int, username: str):
     db_admin = session.query(Admin).filter(Admin.id == id).first()
@@ -66,10 +66,12 @@ def edit_admin(old_id: int, old_username: str, new_id: int = None, new_username:
     session.close()
 
     return {
-        'id': new_id,
-        'username': new_username,
-        'name': new_name,
-        'password': new_password
+        'old_id': old_id,
+        'old_username': old_username,
+        'new_id': new_id,
+        'new_username': new_username,
+        'new_name': new_name,
+        'new_password': new_password
     }
 
 def get_admins():
@@ -88,17 +90,8 @@ def get_admins():
 
     return admins
 
-def delete_admins():
-    db_admins = session.query(Admin).all()
-
-    if not db_admins:
-        raise HTTPException(status_code=404, detail='No admins were found')
-
-    for db_admin in db_admins:
-        delete_admin(db_admin.id, db_admin.username)
-
 def add_founder(id: int, username: str, name: str, password: str):
-    db_founder = session.query(Founder).filter(Founder.id == id).first()
+    db_founder = session.query(Founder).filter(or_(Founder.id == id, Founder.username == username)).first()
 
     if db_founder:
         raise HTTPException(status_code=409, detail='Founder already exists')
@@ -110,12 +103,12 @@ def add_founder(id: int, username: str, name: str, password: str):
         'password': hash_text(password)
     }
 
-    db_founder = Admin(**founder_data)
+    db_founder = Founder(**founder_data)
     session.add(db_founder)
     session.commit()
     session.close()
 
-    return db_founder
+    return founder_data
 
 def get_founders():
     db_founders = session.query(Founder).all()
